@@ -33,7 +33,7 @@ public class Client extends AbstractEntity {
     private String adresse;
 
     @OneToMany(mappedBy = "client")
-    private List<Dette> dettes = new ArrayList<>();
+    private List<Dette> commandes = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "\"userId\"")
@@ -42,9 +42,9 @@ public class Client extends AbstractEntity {
     @Column(name = "solde")
     private Double solde;
 
-    public void setDettes(Dette dette) {
-        solde += dette.getMontant();
-        dettes.add(dette);
+    public void setDettes(Dette commande) {
+        solde += commande.getMontant();
+        commandes.add(commande);
     }
 
     @Override
@@ -55,7 +55,7 @@ public class Client extends AbstractEntity {
                 ", address='" + telephone + '\'' +
                 ", montantDette='" + solde + '\'' +
                 ", Telephone='" + telephone + '\'' +
-                ", dettes=" + dettes + '}';
+                ", commandes=" + commandes + '}';
     }
 
 }

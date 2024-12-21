@@ -17,53 +17,44 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="620.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="detteproject.controller.DetteController">
    <children>
       <AnchorPane layoutX="71.0" layoutY="76.0" prefHeight="360.0" prefWidth="488.0" style="-fx-background-color: #111827; -fx-background-radius: 5px;">
          <children>
-            <Label layoutX="31.0" layoutY="73.0" text="Client:" textFill="#f2ecec" />
+             <Label layoutX="31.0" layoutY="73.0" text="Client:" textFill="#f2ecec" />
             <TextField fx:id="telephoneField" layoutX="83.0" layoutY="69.0" prefHeight="25.0" prefWidth="297.0" promptText="Entrer le numero de telephone du client" />
             <Button layoutX="411.0" layoutY="69.0" mnemonicParsing="false" onAction="#Search" text="Search" textFill="#111827" />
-            <Label layoutX="31.0" layoutY="122.0" text="Article:" textFill="#f4f1f1" />
-            <ComboBox fx:id="articleComboBox" disable="true" layoutX="83.0" layoutY="118.0" prefHeight="25.0" prefWidth="168.0" promptText="Selectionner un article" />
-            <Label layoutX="274.0" layoutY="121.0" text="Quantité:" textFill="#f6f3f3" />
-            <TextField fx:id="quantityTextField" disable="true" layoutX="340.0" layoutY="118.0" prefHeight="25.0" prefWidth="122.0" promptText="Entrer la quantite" />
-            <Button fx:id="addDetailButton" disable="true" layoutX="370.0" layoutY="160.0" text="Ajouter Article" />
-            <Button fx:id="saveDebtButton" disable="true" layoutX="356.0" layoutY="317.0" prefHeight="25.0" prefWidth="106.0" text="Enregistrer Dette" />
-            <TableView fx:id="detailsTableView" layoutX="25.0" layoutY="203.0" prefHeight="101.0" prefWidth="437.0" style="-fx-background-radius: 10px;">
+            <Label layoutX="31.0" layoutY="146.0" text="Article:" textFill="#f4f1f1" />
+            <ComboBox fx:id="articleComboBox" disable="true" layoutX="83.0" layoutY="143.0" prefHeight="25.0" prefWidth="168.0" promptText="Selectionner un article" />
+            <Label layoutX="274.0" layoutY="148.0" text="Quantité:" textFill="#f6f3f3" />
+            <TextField fx:id="quantityTextField" disable="true" layoutX="340.0" layoutY="145.0" prefHeight="25.0" prefWidth="122.0" promptText="Entrer la quantite" />
+            <Button fx:id="addDetailButton" disable="true" layoutX="370.0" layoutY="184.0" text="Ajouter Article" />
+            <Button fx:id="saveDebtButton" disable="true" layoutX="356.0" layoutY="328.0" prefHeight="25.0" prefWidth="106.0" text="Enregistrer Dette" />
+            <TableView fx:id="detailsTableView" layoutX="25.0" layoutY="220.0" prefHeight="101.0" prefWidth="437.0" style="-fx-background-radius: 10px;">
                <columns>
                   <TableColumn fx:id="articleColumn" prefWidth="213.33334350585938" text="Article" />
                   <TableColumn fx:id="quantityColumn" prefWidth="222.00002034505206" text="Quantité" />
+                  <!-- <TableColumn fx:id="actionColumn" prefWidth="100.0" text="Action" /> -->
                </columns>
             </TableView>
-            <Label layoutX="168.0" layoutY="9.0" prefHeight="39.0" prefWidth="168.0" text="Creer Dette" textFill="#f6f5f5">
+            <Label layoutX="168.0" layoutY="9.0" prefHeight="39.0" prefWidth="168.0" text="Creer Commande" textFill="#f6f5f5">
                <font>
                   <Font name="System Bold" size="27.0" />
                </font>
             </Label>
+            <TextField  fx:id="nomTextField" disable="true" layoutX="83.0" layoutY="104.0" prefHeight="25.0" prefWidth="106.0" />
+            <TextField fx:id="addresseTextField" disable="true" layoutX="259.0" layoutY="104.0" prefHeight="25.0" prefWidth="122.0" />
+            <Text fill="WHITE" layoutX="38.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="nom" />
+            <Text fill="WHITE" layoutX="205.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="addresse" />
+            <TextField layoutX="85.0" fx:id="montantTextField" layoutY="328.0" prefHeight="25.0" prefWidth="92.0" />
+            <Text fill="WHITE" layoutX="27.0" layoutY="345.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Montant" />
          </children>
       </AnchorPane>
       <Pane prefHeight="63.0" prefWidth="620.0" style="-fx-background-color: #111827;">
          <children>
-            <MenuButton layoutX="136.0" layoutY="26.0" prefHeight="18.0" prefWidth="72.0" style="-fx-background-color: white; -fx-font-size: 10px; -fx-padding: 3 10; -fx-background-radius: 8px;" text="Dette" textFill="#111827">
-               <items>
-                  <MenuItem onAction="#handleListDebt" text="Lister Dette" />
-                  <MenuItem onAction="#handleDebtRequests" text="lister Dettes d'un client" />
-               </items>
-            </MenuButton>
-            <MenuButton layoutX="232.0" layoutY="26.0" prefHeight="17.0" prefWidth="73.0" style="-fx-background-color: white; -fx-font-size: 10px; -fx-padding: 3 10; -fx-background-radius: 8px;" text="Client" textFill="#111827">
-               <items>
-                  <MenuItem onAction="#handleListClients" text="Lister Clients" />
-                  <MenuItem onAction="#handleClientInfo" text="Infos Clients" />
-               </items>
-            </MenuButton>
-            <MenuButton layoutX="328.0" layoutY="26.0" prefHeight="5.0" prefWidth="89.0" style="-fx-background-color: white; -fx-font-size: 10px; -fx-padding: 3 10; -fx-background-radius: 8px;" text="Paiement" textFill="#111827">
-               <items>
-                  <MenuItem onAction="#handleDebtPayment" text="Paiement Dette" />
-               </items>
-            </MenuButton>
-            <Button layoutX="521.0" layoutY="25.0" mnemonicParsing="false" onAction="#Deconnexion" prefHeight="30.0" prefWidth="89.0" style="-fx-background-radius: 10px; -fx-background-color: red;" text="Deconnexion" textFill="WHITE" />
+
             <Circle layoutX="39.0" layoutY="39.0" radius="20.0" stroke="BLACK" strokeType="INSIDE">
                <fill>
                   <LinearGradient endX="1.0" endY="1.0">

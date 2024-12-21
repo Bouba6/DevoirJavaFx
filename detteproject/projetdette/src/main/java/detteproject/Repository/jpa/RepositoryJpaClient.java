@@ -7,7 +7,6 @@ import java.util.List;
 
 import javax.persistence.Query;
 
-import detteproject.Repository.Bd.ClientRepositoryBD;
 import detteproject.core.RepositorieClient;
 import detteproject.core.RepositoryJpaImpl;
 import detteproject.core.Config.Repositorie;

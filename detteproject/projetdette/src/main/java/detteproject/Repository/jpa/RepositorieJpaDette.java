@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import detteproject.State.EtatDette;
+
 import detteproject.core.RepositorieDette;
 import detteproject.core.RepositoryJpaImpl;
 
@@ -100,12 +101,12 @@ public class RepositorieJpaDette extends RepositoryJpaImpl<Dette> implements Rep
     public Dette getById(int id, Client client) {
         em.getTransaction().begin();
         try {
-            Dette dette = em.find(Dette.class, id);
-            if (dette == null) {
-                System.out.println("Dette non existante");
+            Dette commande = em.find(Dette.class, id);
+            if (commande == null) {
+                System.out.println("commande non existante");
                 return null;
             } else {
-                return dette;
+                return commande;
             }
         } finally {
             em.getTransaction().commit();
@@ -114,7 +115,7 @@ public class RepositorieJpaDette extends RepositoryJpaImpl<Dette> implements Rep
     }
 
     private String getTableName() {
-        return "dette";
+        return "commande";
     }
 
     @Override
@@ -132,11 +133,12 @@ public class RepositorieJpaDette extends RepositoryJpaImpl<Dette> implements Rep
     }
 
     @Override
-    public List<DetailDette> ListDetArt(Dette dette) {
+    public List<DetailDette> ListDetArt(Dette commande) {
         em.getTransaction().begin();
         try {
             String sql = "SELECT * FROM detailDette Where detteid = ?";
-            List<DetailDette> list = em.createNativeQuery(sql, DetailDette.class).setParameter(1, dette.getId())
+            List<DetailDette> list = em.createNativeQuery(sql, DetailDette.class)
+                    .setParameter(1, commande.getId())
                     .getResultList();
             return list;
         } finally {
@@ -145,11 +147,11 @@ public class RepositorieJpaDette extends RepositoryJpaImpl<Dette> implements Rep
     }
 
     @Override
-    public List<Paiement> ListDetPai(Dette dette) {
+    public List<Paiement> ListDetPai(Dette commande) {
         em.getTransaction().begin();
         try {
             String sql = "SELECT * FROM paiement WHERE detteid = ?";
-            List<Paiement> list = em.createNativeQuery(sql, Paiement.class).setParameter(1, dette.getId())
+            List<Paiement> list = em.createNativeQuery(sql, Paiement.class).setParameter(1, commande.getId())
                     .getResultList();
             return list;
         } finally {
@@ -162,7 +164,8 @@ public class RepositorieJpaDette extends RepositoryJpaImpl<Dette> implements Rep
         em.getTransaction().begin();
         try {
             String sql = String.format("SELECT * FROM %s WHERE etatid = ?", getTableName());
-            List<Dette> list = em.createNativeQuery(sql, Dette.class).setParameter(1, etat.ordinal()).getResultList();
+            List<Dette> list = em.createNativeQuery(sql, Dette.class).setParameter(1, etat.ordinal())
+                    .getResultList();
             return list;
         } finally {
             em.getTransaction().commit();
@@ -173,12 +176,12 @@ public class RepositorieJpaDette extends RepositoryJpaImpl<Dette> implements Rep
     public Dette getById1(int id) {
         em.getTransaction().begin();
         try {
-            Dette dette = em.find(Dette.class, id);
-            if (dette == null) {
-                System.out.println("Dette non existante");
+            Dette commande = em.find(Dette.class, id);
+            if (commande == null) {
+                System.out.println("Commande non existante");
                 return null;
             } else {
-                return dette;
+                return commande;
             }
         } finally {
             em.getTransaction().commit();

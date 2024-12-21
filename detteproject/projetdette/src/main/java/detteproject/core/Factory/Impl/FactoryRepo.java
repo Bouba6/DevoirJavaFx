@@ -11,7 +11,6 @@ import detteproject.data.entities.User;
 
 import java.util.Map;
 
-import detteproject.Repository.Bd.ClientRepositoryBD;
 import detteproject.Repository.Bd.UserRepositoryBD;
 import detteproject.Repository.jpa.RepositoryJpaClient;
 import detteproject.Repository.jpa.RepositoryJpaUser;
@@ -27,15 +26,24 @@ public class FactoryRepo<T> implements FactoryRepositoryInterface<T> {
         if (Client.class.isAssignableFrom(clazz)) {
             String yh = (String) ((Map<String, Object>) config.get("repositories")).get("clientRepository");
             String yh2 = (String) ((Map<String, Object>) config.get("repositories")).get("userRepository");
-            this.repositorie = (Repositorie<T>) CreateRepositoryInstance(yh, yh2, null, null);
-            // this.repositorie = (Repositorie<T>) CreateRepositoryInstance(yh, null, null);
-        } else if (User.class.isAssignableFrom(clazz)) {
-            String yh = (String) ((Map<String, Object>) config.get("repositories")).get("userRepository");
-            this.repositorie = (Repositorie<T>) CreateRepositoryInstance(yh, null, null, null);
+            this.repositorie = (Repositorie<T>) CreateRepositoryInstance(yh, yh2, null,
+                    null);
+            // this.repositorie = (Repositorie<T>) CreateRepositoryInstance(yh, null,
+            // null);
+        }
 
-            // this.repositorie = (Repositorie<T>) CreateRepositoryInstance(yh, null, null);
+        // else if (User.class.isAssignableFrom(clazz)) {
+        // String yh = (String) ((Map<String, Object>)
+        // config.get("repositories")).get("userRepository");
+        // this.repositorie = (Repositorie<T>) CreateRepositoryInstance(yh, null, null,
+        // null);
 
-        } else if (Dette.class.isAssignableFrom(clazz)) {
+        // // this.repositorie = (Repositorie<T>) CreateRepositoryInstance(yh, null,
+        // null);
+
+        // }
+
+        else if (Dette.class.isAssignableFrom(clazz)) {
             String yh3 = (String) ((Map<String, Object>) config.get("repositories")).get("detteRepository");
             String yh4 = (String) ((Map<String, Object>) config.get("repositories")).get("clientRepository");
             String yh5 = (String) ((Map<String, Object>) config.get("repositories")).get("articleRepository");
@@ -48,15 +56,21 @@ public class FactoryRepo<T> implements FactoryRepositoryInterface<T> {
             String yh = (String) ((Map<String, Object>) config.get("repositories")).get("articleRepository");
             this.repositorie = (Repositorie<T>) (Object) CreateRepositoryInstance(yh, null, null, null);
 
-        } else if (Paiement.class.isAssignableFrom(clazz)) {
-            String yh = (String) ((Map<String, Object>) config.get("repositories")).get("paiementRepository");
-            String yh2 = (String) ((Map<String, Object>) config.get("repositories")).get("detteRepository");
-            this.repositorie = (Repositorie<T>) (Object) CreateRepositoryInstance(yh,
-                    yh2, null, null);
-            // this.repositorie = (Repositorie<T>) (Object) CreateRepositoryInstance(yh,
-            // null, null);
+        }
 
-        } else {
+        // else if (Paiement.class.isAssignableFrom(clazz)) {
+        // String yh = (String) ((Map<String, Object>)
+        // config.get("repositories")).get("paiementRepository");
+        // String yh2 = (String) ((Map<String, Object>)
+        // config.get("repositories")).get("detteRepository");
+        // this.repositorie = (Repositorie<T>) (Object) CreateRepositoryInstance(yh,
+        // yh2, null, null);
+        // // this.repositorie = (Repositorie<T>) (Object) CreateRepositoryInstance(yh,
+        // // null, null);
+
+        // }
+
+        else {
             throw new IllegalArgumentException("Unsupported entity type: " + clazz.getName());
         }
     }
@@ -97,15 +111,20 @@ public class FactoryRepo<T> implements FactoryRepositoryInterface<T> {
                     Class<?> clazz2 = Class.forName(classname2);
                     Class<?> clazz3 = Class.forName(classname3);
                     Object paramInstance1;
-                    if (clazz2.equals(ClientRepositoryBD.class)) {
-                        UserRepositoryBD userRepositoryBD = new UserRepositoryBD();
-                        paramInstance1 = clazz2.getConstructor(UserRepositoryBD.class)
-                                .newInstance(userRepositoryBD);
-                    } else if (clazz2.equals(RepositoryJpaClient.class)) {
+
+                    // if (clazz2.equals(ClientRepositoryBD.class)) {
+                    // UserRepositoryBD userRepositoryBD = new UserRepositoryBD();
+                    // paramInstance1 = clazz2.getConstructor(UserRepositoryBD.class)
+                    // .newInstance(userRepositoryBD);
+                    // }
+
+                    if (clazz2.equals(RepositoryJpaClient.class)) {
                         RepositoryJpaUser repositoryJpaUser = new RepositoryJpaUser();
                         paramInstance1 = clazz2.getConstructor(RepositoryJpaUser.class)
                                 .newInstance(repositoryJpaUser);
-                    } else {
+                    }
+
+                    else {
                         throw new RuntimeException("Unsupported class: " + clazz2.getName());
                     }
 

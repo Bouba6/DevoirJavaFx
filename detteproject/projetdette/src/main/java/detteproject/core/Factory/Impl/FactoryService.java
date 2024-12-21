@@ -17,9 +17,8 @@ import detteproject.data.entities.Paiement;
 import detteproject.data.entities.User;
 import detteproject.services.ArticleService;
 import detteproject.services.ClientService;
-import detteproject.services.UserService;
+
 import detteproject.services.DetteService;
-import detteproject.services.PaiementService;
 
 public class FactoryService<T> implements FactoryServiceInterface<T> {
     private final Service<T> service;
@@ -31,14 +30,10 @@ public class FactoryService<T> implements FactoryServiceInterface<T> {
         // isintanceof()
         if (Client.class.isAssignableFrom(clazz)) {
             this.service = (Service<T>) new ClientService((RepositorieClient) repositorie); // Correct instantiation
-        } else if (User.class.isAssignableFrom(clazz)) {
-            this.service = (Service<T>) new UserService((RepositorieUser) repositorie); // Correct instantiation
         } else if (Dette.class.isAssignableFrom(clazz)) {
             this.service = (Service<T>) new DetteService((RepositorieDette) repositorie); // Correct instantiation
         } else if (Article.class.isAssignableFrom(clazz)) {
             this.service = (Service<T>) new ArticleService((RepositorieArticle) repositorie); // Correct instantiation
-        } else if (Paiement.class.isAssignableFrom(clazz)) {
-            this.service = (Service<T>) new PaiementService((RepositoriePaiement) repositorie); // Correct instantiation
         } else {
             throw new IllegalArgumentException("Unsupported entity type: " + clazz.getName());
         }

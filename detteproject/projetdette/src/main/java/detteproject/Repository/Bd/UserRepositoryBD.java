@@ -9,7 +9,6 @@ import detteproject.core.RepositorieUser;
 import detteproject.core.RepositoryBdImpl;
 import detteproject.data.entities.Client;
 import detteproject.data.entities.User;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
